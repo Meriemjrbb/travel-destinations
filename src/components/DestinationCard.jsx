@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { MapPin, Clock, Star, X } from "lucide-react";
 import { Rating } from "react-simple-star-rating";
+import { Link } from "react-router-dom";
 
 const gradients = [
   "linear-gradient(135deg,#0077b6,#00b4d8)",
@@ -17,7 +18,7 @@ export default function DestinationCard({ destination, onDelete }) {
     <article className="dest-card">
       <div className="dest-img">
         {imgError ? (
-          <div className="dest-fallback" style={{ background: gradients[id % gradients.length] }}>
+          <div className="dest-fallback" style={{ background: gradients[Number.parseInt(id, 36) % gradients.length] }}>
             {title}
           </div>
         ) : (
@@ -44,7 +45,7 @@ export default function DestinationCard({ destination, onDelete }) {
         </div>
 
         <div className="dest-actions">
-          <button className="btn-explore">Explorer</button>
+          <Link className="btn-explore text-center text-decoration-none" to={`/destinations/${id}`}>View Details</Link>
           {isNew && (
             <button className="btn-remove" onClick={() => onDelete(id)} aria-label={`Retirer ${title}`}>
               <X size={18} />

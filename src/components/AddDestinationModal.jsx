@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Modal, Form, Button, Row, Col } from "react-bootstrap";
 import { Rating } from "react-simple-star-rating";
 
-const empty = { title: "", country: "", description: "", price: "", days: 7, image: "", rating: 4 };
+const empty = { title: "", country: "", description: "", price: "", days: 7, image: "", rating: 4, flightDuration: "", airline: "", bestSeason: "" };
 
 export default function AddDestinationModal({ show, onHide, onAdd }) {
   const [form, setForm] = useState(empty);
@@ -24,7 +24,7 @@ export default function AddDestinationModal({ show, onHide, onAdd }) {
     }
     onAdd({
       ...form,
-      id: Date.now(),
+      id: Math.random().toString(36).slice(2, 10),
       price: Number(form.price),
       days: Number(form.days),
       image: form.image.trim(),
@@ -54,6 +54,24 @@ export default function AddDestinationModal({ show, onHide, onAdd }) {
                 <Form.Label>Pays</Form.Label>
                 <Form.Control name="country" value={form.country} onChange={handleChange} placeholder="Portugal" required />
                 <Form.Control.Feedback type="invalid">Indiquez le pays.</Form.Control.Feedback>
+              </Form.Group>
+            </Col>
+            <Col sm={4}>
+              <Form.Group controlId="flightDuration">
+                <Form.Label>Durée du vol</Form.Label>
+                <Form.Control name="flightDuration" value={form.flightDuration} onChange={handleChange} placeholder="Ex : 2 h 30" required />
+              </Form.Group>
+            </Col>
+            <Col sm={4}>
+              <Form.Group controlId="airline">
+                <Form.Label>Compagnie aérienne</Form.Label>
+                <Form.Control name="airline" value={form.airline} onChange={handleChange} placeholder="Ex : Tunisair" required />
+              </Form.Group>
+            </Col>
+            <Col sm={4}>
+              <Form.Group controlId="bestSeason">
+                <Form.Label>Meilleure saison</Form.Label>
+                <Form.Control name="bestSeason" value={form.bestSeason} onChange={handleChange} placeholder="Ex : avril à juin" required />
               </Form.Group>
             </Col>
             <Col xs={12}>
